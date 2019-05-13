@@ -7,32 +7,13 @@
 	этого набора, в которых 1 <= i < j <= N, сумма элементов нечётна, произведение делится на 13, 
 	а номера чисел в последовательности отличаются не менее, чем на 5. Напишите программу для решения этой задачи.
 */
-
 using namespace std;
-
-int Convert_to_Int(string str) {
-	/*Функция перевода из типа string в int
-		Если в подаваемой строке содержатся только число, то программа вернёт натуральное число
-		Иначе выдаст -1, что означает ошибку в работе функции	
-	*/
-	int res = 0, j = 1;
-	for (int i = str.length()-1; i >= 0; --i) {
-		if (str[i] - '0' < 10) {
-			res += (str[i] - '0') * j;
-			j *= 10;
-		}
-		else 			
-			return -1;				
-	}
-	return res;
-}
-
 
 int main() {
 	// Открытие файла
 	const string path = "input.txt";
 	ifstream of(path);
-	string str;
+	int curr_num;
 
 	//Инициализация переменных для выполнения алгоритма
 	int multiplicity26 = 0, // Кол-во элементов кратных 26
@@ -45,10 +26,10 @@ int main() {
 	int i = 0;
 	int curr_count = 5;
 
-	for (of >> str; !of.eof(); of >> str) {
-		if (Convert_to_Int(str) > 0) {
+	for (of >> curr_num; !of.eof(); of >> curr_num) {
+		if (curr_num > 0) {
 			if (i < Draft) {
-				Queue[i] = Convert_to_Int(str);
+				Queue[i] = curr_num;
 				i++;
 			}
 			else {
@@ -68,7 +49,7 @@ int main() {
 					else
 						multiplicity1++;
 				}
-				int curr = Convert_to_Int(str);
+				int curr = curr_num;
 				if (curr % 13 == 0) {
 					if (curr % 2 == 0)
 						count += multiplicity1;
